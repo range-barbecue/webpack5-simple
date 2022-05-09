@@ -10,16 +10,10 @@ module.exports = merge(config, {
     rules: [
       {
         test: /\.js?$/,
-        // exclude: /node_modules/,
-        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
+        include: path.resolve(process.cwd(), 'src'),
         use: {
-          loader: 'happypack/loader?id=babel',
-          options: {
-            sourceMap: true,
-            presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
-            ]
-          }
+          loader: 'happypack/loader?id=babel'
         }
       }
     ]

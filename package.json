@@ -11,14 +11,22 @@
   "author": "tr",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/runtime": "^7.17.9",
+    "@babel/runtime-corejs3": "^7.17.9",
     "autoprefixer": "^10.4.7",
+    "babel-plugin-import": "^1.13.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "happypack": "^5.0.1",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "postcss": "^8.4.13",
     "postcss-loader": "^6.2.1",
     "sass": "^1.51.0",
@@ -31,6 +39,38 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "babel-loader": "^8.2.5"
+    "@reduxjs/toolkit": "^1.8.1",
+    "antd": "^4.20.2",
+    "babel-loader": "^8.2.5",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.2.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": true
+        }
+      ],
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "absoluteRuntime": false,
+          "corejs": 3,
+          "helpers": true,
+          "regenerator": true,
+          "useESModules": false
+        }
+      ]
+    ]
   }
 }

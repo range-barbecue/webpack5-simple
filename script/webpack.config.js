@@ -32,8 +32,10 @@ module.exports = {
     },
     port: 8080
   },
+  target: 'web',
   // 全局规则处理
   resolve: {
+    extensions: ['.js', '.jsx'],
     alias: {
       // 使用@符号代表src路径
       '@': path.resolve(process.cwd(), 'src'),
@@ -43,26 +45,20 @@ module.exports = {
   devtool: 'source-map',
   // 依赖模块
   module: {
-    noParse: /jquery|lodash/,
+    noParse: /jquery/,
     rules: [
       // es6语法转换
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/i,
         exclude: /node_modules/,
-        include: path.resolve(__dirname, 'src'),
+        include: path.resolve(process.cwd(), 'src'),
         use: {
-          loader: 'babel-loader?cacheDirectory',
-          options: {
-            sourceMap: true,
-            presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
-            ]
-          }
+          loader: 'babel-loader'
         }
       },
       // scss、css语法转换
       {
-        test: /\.(css|scss)?$/,
+        test: /\.(css|scss)?$/i,
         use: [
           { loader: 'style-loader' },
           {
@@ -98,6 +94,25 @@ module.exports = {
                   ],
                 ],
               },
+            }
+          }
+        ],
+      },
+      {
+        test: /\.less?$/i,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: isDev
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              // modifyVars: {},
+              javascriptEnabled: true
             }
           }
         ],
